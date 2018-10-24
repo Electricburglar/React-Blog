@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-class Header extends Component {
+class Navigation extends Component {
     render() {
       return (
         <Nav>
@@ -18,7 +18,7 @@ class Header extends Component {
     }
   }
   
-export default Header;
+export default Navigation;
 
 const Nav = styled.div`
     width: 100%;
