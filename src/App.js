@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Header from './Components/Header';
-import Navigation from './Components/Navigation';
+import Header from './Layout/Header';
+import Navigation from './Layout/Navigation';
 
 class App extends Component {
   render() {
