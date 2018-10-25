@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
     render() {
       return (
         <Container>
             <Element>
-                <ShortCut>로그인/회원가입</ShortCut>
+                <ShortCut><Link to="/login">로그인/회원가입</Link></ShortCut>
                 <Logo><img width="100%" height="100%" src="https://t1.daumcdn.net/cfile/tistory/99CD014B5BD01FA412" alt="logo"/></Logo>
-                <Search><h1>React Blog</h1></Search>
+                <Search><Link to="/" style={{textDecoration: 'none', color:'#274046'}}><h1>React Blog</h1></Link></Search>
             </Element>
         </Container>
       );
@@ -35,7 +36,6 @@ const ShortCut = styled.div`
     width: 100%;
     height: 20px;
     text-align: right;
-    background-color: #a8ff78;
 `
 
 const Logo = styled.div`
@@ -47,6 +47,8 @@ const Logo = styled.div`
 const Search = styled.div`
     order: 3;
     width: 880px;
-    background-color: #78ffd6;
+    background: #1FA2FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
     text-align: center;
 `
