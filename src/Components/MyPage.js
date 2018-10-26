@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import withLogin from './LoginHOC';
 
-class Board extends Component {
+class MyPage extends Component {
   render() {
     return (
         <div>
@@ -11,4 +12,4 @@ class Board extends Component {
   }
 }
 
-export default Board;
+export default withLogin(MyPage);

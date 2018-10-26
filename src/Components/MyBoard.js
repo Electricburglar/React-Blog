@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import withLogin from './LoginHOC';
 
 class MyBoard extends Component {
   render() {
@@ -11,4 +12,4 @@ class MyBoard extends Component {
   }
 }
 
-export default MyBoard;
+export default withLogin(MyBoard);

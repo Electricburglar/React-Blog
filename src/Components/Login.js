@@ -2,39 +2,56 @@ import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
 import styled from 'styled-components';
+import Store from '../Store/store';
 
 class Login extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            user: {
-                email: '',
-                name: '',
-            }
+            id: '',
+            name: '',
+            provider: '',
         }
+    }
+    // Google Login
+    responseGoogle = (res) => {
+        this.setState({
+            id: res.googleId,
+            name: res.profileObj.name,
+            provider: 'google'
+        })
+        this.props.onLogin();
+    }
+    // Kakao Login
+    responseKakao = (res) => {
+        this.setState({
+            id: res.profile.id,
+            name: res.profile.properties.nickname,
+            provider: 'kakao'
+        })
+        this.props.onLogin();
+    }
+
+    // Login Fail
+    responseFail = (err) => {
+        console.error(err);
     }
 
     render() {
-        const responseGoogle = (res) => {
-            console.log(res);
-        }
-        const responseKakao = (res) => {
-            console.log(res)
-        }
         return (
             <Container>
                 <GoogleLogin
                     clientId="481852525710-e38o22ih7kkf57cnhnmamh27rhskol0g.apps.googleusercontent.com"
                     buttonText="Google"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseFail}
                 />
                 <KakaoButton
                     jsKey="16e3543994b4074741035202c0a2e56b"
                     buttonText="Kakao"
-                    onSuccess={responseKakao}
-                    onFailure={responseKakao}
+                    onSuccess={this.responseKakao}
+                    onFailure={this.responseFail}
                     getProfile="true"
                 />
             </Container>
@@ -57,7 +74,15 @@ const KakaoButton = styled(KakaoLogin)`
     border: 1px solid transparent;
     border-radius: 3px;
     font-size: 16px;
+    font-weight: bold;
     text-align: center;
 `
 
-export default Login;
+const LoginContainer = () => (
+    <Store.Consumer>
+        {(store) => (
+            <Login onLogin={store.onLogin} />)}
+    </Store.Consumer>
+)
+
+export default LoginContainer;
