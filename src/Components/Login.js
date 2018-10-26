@@ -42,13 +42,13 @@ class Login extends Component {
         return (
             <Container>
                 <GoogleLogin
-                    clientId="481852525710-e38o22ih7kkf57cnhnmamh27rhskol0g.apps.googleusercontent.com"
+                    clientId={process.env.Google}
                     buttonText="Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseFail}
                 />
                 <KakaoButton
-                    jsKey="16e3543994b4074741035202c0a2e56b"
+                    jsKey={process.env.Kakao}
                     buttonText="Kakao"
                     onSuccess={this.responseKakao}
                     onFailure={this.responseFail}
