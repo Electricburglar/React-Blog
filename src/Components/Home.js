@@ -32,10 +32,10 @@ class Home extends Component {
   render() {
       const { temperature, name, icon } = this.state;
       const img_url = `http://openweathermap.org/img/w/${icon}.png`;
-
+      const date = new Date();
       return (
         <>
-          <h1>오늘의 날씨</h1>
+          <h1>{date.getMonth()+1}월 {date.getDate()}일의 날씨</h1>
           <img alt="weather_icon" src={img_url}/>
           <h3>온도 : {temperature}°C</h3>
           <h3>날씨 : {name}</h3>

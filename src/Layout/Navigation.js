@@ -8,11 +8,9 @@ class Navigation extends Component {
         <Nav>
             <NavList>
                 <NavItem><Link to='/about'>소개</Link></NavItem>
-                <NavItem>게시판</NavItem>
-                <NavItem>연락</NavItem>
-                <NavItem>메뉴1</NavItem>
-                <NavItem>메뉴2</NavItem>
-                <NavItem>메뉴3</NavItem>
+                <NavItem><Link to='/board'>게시판</Link></NavItem>
+                <NavItem><Link to='/myboard'>내 글보기</Link></NavItem>
+                <NavItem><Link to='/mypage'>마이페이지</Link></NavItem>
             </NavList>
         </Nav>
       );
@@ -34,8 +32,7 @@ const NavList = styled.ul`
 `
 
 const NavItem = styled.li`
-    width: 60px;
-    margin-left: 18px;
-    margin-top: 5px;
+    width: 80px;
+    margin: auto;
     display: flex;
 `
