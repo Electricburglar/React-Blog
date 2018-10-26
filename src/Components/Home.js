@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const API_KEY = 'fa6898c798d676c3c6fa663a9fb6756a';
+const API_KEY = '';
 
 class Home extends Component {
 
