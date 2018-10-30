@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
 import styled from 'styled-components';
-import Store from '../Store/store';
+import { graphql, compose } from 'react-apollo';
+import { SignUp } from '../queries';
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 
@@ -20,8 +22,8 @@ class Login extends Component {
             id: res.googleId,
             name: res.profileObj.name,
             provider: 'google'
-        })
-        this.props.onLogin();
+        });
+        this.doSignUp();
     }
     // Kakao Login
     responseKakao = (res) => {
@@ -29,26 +31,45 @@ class Login extends Component {
             id: res.profile.id,
             name: res.profile.properties.nickname,
             provider: 'kakao'
-        })
-        this.props.onLogin();
+        });
+        this.doSignUp();
     }
 
     // Login Fail
     responseFail = (err) => {
         console.error(err);
     }
+    
+    // SignUp Mutation
+    doSignUp = async () => {
+        const { id, name, provider } = this.state;
+        const user = await this.props.SignUpMutation({
+            variables: {
+                id,
+                name,
+                provider
+            }
+        });
+        
+        if(user.data.SignUp === true) {
+            this.props.onLogin();
+            this.props.history.push('/');
+        }
+        else
+            alert("로그인에 실패하셨습니다.");
+    }
 
     render() {
         return (
             <Container>
                 <GoogleLogin
-                    clientId={process.env.Google}
+                    clientId={process.env.REACT_APP_Google}
                     buttonText="Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseFail}
                 />
                 <KakaoButton
-                    jsKey={process.env.Kakao}
+                    jsKey={process.env.REACT_APP_Kakao}
                     buttonText="Kakao"
                     onSuccess={this.responseKakao}
                     onFailure={this.responseFail}
@@ -78,11 +99,6 @@ const KakaoButton = styled(KakaoLogin)`
     text-align: center;
 `
 
-const LoginContainer = () => (
-    <Store.Consumer>
-        {(store) => (
-            <Login onLogin={store.onLogin} />)}
-    </Store.Consumer>
-)
-
-export default LoginContainer;
+export default compose(
+    graphql(SignUp, { name: 'SignUpMutation'})
+)(withRouter(Login));

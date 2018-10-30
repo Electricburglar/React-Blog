@@ -14,21 +14,21 @@ class App extends Component {
         onLogin: this.onLogin,
         onLogout: this.onLogout
     }
-}
+  }
 
-// Login Func
-onLogin = () => {
-    this.setState({
-        logged: true
-    });
-}
+  // Login Func
+  onLogin = () => {
+      this.setState({
+          logged: true
+      });
+  }
 
-// Logout Func
-onLogout = () => {
-    this.setState({
-        logged: false
-    });
-}
+  // Logout Func
+  onLogout = () => {
+      this.setState({
+          logged: false
+      });
+  }
   render() {
     const { logged, onLogout } = this.state;
 

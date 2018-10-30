@@ -11,4 +11,8 @@ class Board extends Component {
   }
 }
 
+const Container = styled.div`
+
+`
+
 export default Board;
