@@ -3,7 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 import KakaoLogin from 'react-kakao-login';
 import styled from 'styled-components';
 import { graphql, compose } from 'react-apollo';
-import { SignUp } from '../queries';
+import { login } from '../queries';
 import { withRouter } from "react-router-dom";
 
 class Login extends Component {
@@ -27,6 +27,7 @@ class Login extends Component {
     }
     // Kakao Login
     responseKakao = (res) => {
+        console.log(res)
         this.setState({
             id: res.profile.id,
             name: res.profile.properties.nickname,
@@ -40,18 +41,20 @@ class Login extends Component {
         console.error(err);
     }
     
-    // SignUp Mutation
+    // Login Mutation
     doSignUp = async () => {
         const { id, name, provider } = this.state;
-        const user = await this.props.SignUpMutation({
+        const user = await this.props.LoginMutation({
             variables: {
-                id,
+                id: String(id),
                 name,
                 provider
             }
         });
-        
-        if(user.data.SignUp === true) {
+        if(user.data.login) {
+            window.sessionStorage.setItem('id', id);
+            window.sessionStorage.setItem('name', user.data.login.name);
+            window.sessionStorage.setItem('provider', provider);
             this.props.onLogin();
             this.props.history.push('/');
         }
@@ -100,5 +103,5 @@ const KakaoButton = styled(KakaoLogin)`
 `
 
 export default compose(
-    graphql(SignUp, { name: 'SignUpMutation'})
+    graphql(login, { name: 'LoginMutation'})
 )(withRouter(Login));

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Store from '../Store/store';
-import LoginContainer from './Login';
+import LoginContainer from './LoginContainer';
 
 const withLogin = (WrappedComponent) =>
     

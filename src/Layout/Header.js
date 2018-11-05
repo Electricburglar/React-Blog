@@ -10,9 +10,12 @@ class Header extends Component {
         return (
             <Container>
                 <Element>
-                    {logged ? 
-                    <ShortCut><Link to="/" onClick={onLogout}>로그아웃</Link></ShortCut> : 
-                    <ShortCut><Link to="/login">로그인/회원가입</Link></ShortCut>}
+                    {logged ?
+                    <><WelcomeMsg>{window.sessionStorage.getItem('name')}님 반갑습니다.</WelcomeMsg>
+                    <ShortCut><Link to="/" onClick={onLogout}>로그아웃</Link></ShortCut></> : 
+                    <>
+                    <WelcomeMsg>React Blog에 오신 걸 환영합니다.</WelcomeMsg>
+                    <ShortCut><Link to="/login">로그인/회원가입</Link></ShortCut></>}
                     <Logo>
                         <img
                             width="100%"
@@ -46,21 +49,28 @@ const Element = styled.div`
     flex-flow: row wrap;
 `
 
-const ShortCut = styled.div`
+const WelcomeMsg = styled.div`
     order: 1;
-    width: 100%;
+    width: 200px;
+    height: 20px;
+    text-align: left;
+` 
+
+const ShortCut = styled.div`
+    order: 2;
+    width: 880px;
     height: 20px;
     text-align: right;
 `
 
 const Logo = styled.div`
-    order: 2;
+    order: 3;
     width: 200px;
     height: 80px;
 `
 
 const Search = styled.div`
-    order: 3;
+    order: 4;
     width: 880px;
     background: #1FA2FF;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */

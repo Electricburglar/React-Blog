@@ -13,6 +13,8 @@ class Home extends Component {
     }
   }
 
+  input = null;
+
   getWeather = () => {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=Seoul&APPID=${API_KEY}`)
     .then(response => response.json())
@@ -26,7 +28,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.getWeather()
+    this.getWeather();
   }
 
   render() {
